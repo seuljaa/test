@@ -1,24 +1,17 @@
-
-
 def make_timetable(a_time: list, b_time: list, c_time: list, d_time: list):
-
     mon_pos = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
     tue_pos = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
     wed_pos = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
     thu_pos = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
     fri_pos = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
 
-    mon_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
-    tue_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
-    wed_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
-    thu_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
-    fri_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
+    mon_final = {'10시': "", '11시': "", '12시': "", '13시': "", '14시': "", '15시': "", '16시': "", '17시': ""}
+    tue_final = {'10시': "", '11시': "", '12시': "", '13시': "", '14시': "", '15시': "", '16시': "", '17시': ""}
+    wed_final = {'10시': "", '11시': "", '12시': "", '13시': "", '14시': "", '15시': "", '16시': "", '17시': ""}
+    thu_final = {'10시': "", '11시': "", '12시': "", '13시': "", '14시': "", '15시': "", '16시': "", '17시': ""}
+    fri_final = {'10시': "", '11시': "", '12시': "", '13시': "", '14시': "", '15시': "", '16시': "", '17시': ""}
 
-    mon = {'a': [], 'b': [], 'c': [], 'd': []}
-    tue = {'a': [], 'b': [], 'c': [], 'd': []}
-    wed = {'a': [], 'b': [], 'c': [], 'd': []}
-    thu = {'a': [], 'b': [], 'c': [], 'd': []}
-    fri = {'a': [], 'b': [], 'c': [], 'd': []}
+    worker = ['a', 'b', 'c', 'd']
 
     data = []
 
@@ -171,25 +164,72 @@ def make_timetable(a_time: list, b_time: list, c_time: list, d_time: list):
                 fri_pos['%d시' % day] = data
                 data = []
 
+    count_dic = {'a_count': 0, 'b_count': 0, 'c_count': 0, 'd_count': 0}
+
     for num in range(10, 18):
-        if len(mon_pos.get('%d시' % num)) == 1:
-            mon_final['%d시' % num] = mon_pos.get('%d시' % num)
-        if len(tue_pos.get('%d시' % num)) == 1:
-            tue_final['%d시' % num] = tue_pos.get('%d시' % num)
-        if len(wed_pos.get('%d시' % num)) == 1:
-            wed_final['%d시' % num] = wed_pos.get('%d시' % num)
-        if len(thu_pos.get('%d시' % num)) == 1:
-            thu_final['%d시' % num] = thu_pos.get('%d시' % num)
-        if len(fri_pos.get('%d시' % num)) == 1:
-            fri_final['%d시' % num] = fri_pos.get('%d시' % num)
+        if len(mon_pos.get('%d시' % num)) == 0:
+            mon_final['%d시' % num] = '불가'
+        if len(tue_pos.get('%d시' % num)) == 0:
+            tue_final['%d시' % num] = '불가'
+        if len(wed_pos.get('%d시' % num)) == 0:
+            wed_final['%d시' % num] = '불가'
+        if len(thu_pos.get('%d시' % num)) == 0:
+            thu_final['%d시' % num] = '불가'
+        if len(fri_pos.get('%d시' % num)) == 0:
+            fri_final['%d시' % num] = '불가'
+        for name in worker:
+            if len(mon_pos.get('%d시' % num)) == 1:
+                if mon_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) < 10:
+                    mon_final['%d시' % num] = mon_pos.get('%d시' % num)[0]
+                    mon_pos['%d시' % num] = []
+                    count_dic['%s_count' % name] = count_dic.get('%s_count' % name)+1
+                elif mon_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) >= 10:
+                    mon_final['%d시' % num] = '불가'
+                    mon_pos['%d시' % num] = []
+
+            if len(tue_pos.get('%d시' % num)) == 1:
+                if tue_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) < 10:
+                    tue_final['%d시' % num] = tue_pos.get('%d시' % num)[0]
+                    tue_pos['%d시' % num] = []
+                    count_dic['%s_count' % name] = count_dic.get('%s_count' % name)+1
+                elif tue_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) >= 10:
+                    tue_final['%d시' % num] = '불가'
+                    tue_pos['%d시' % num] = []
+            if len(wed_pos.get('%d시' % num)) == 1:
+                if wed_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) < 10:
+                    wed_final['%d시' % num] = wed_pos.get('%d시' % num)[0]
+                    wed_pos['%d시' % num] = []
+                    count_dic['%s_count' % name] = count_dic.get('%s_count' % name)+1
+                elif wed_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) >= 10:
+                    wed_final['%d시' % num] = '불가'
+                    wed_pos['%d시' % num] = []
+            if len(thu_pos.get('%d시' % num)) == 1:
+                if thu_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) < 10:
+                    thu_final['%d시' % num] = thu_pos.get('%d시' % num)[0]
+                    thu_pos['%d시' % num] = []
+                    count_dic['%s_count' % name] = count_dic.get('%s_count' % name)+1
+                elif thu_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) >= 10:
+                    thu_final['%d시' % num] = '불가'
+                    thu_pos['%d시' % num] = []
+            if len(fri_pos.get('%d시' % num)) == 1:
+                if fri_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) < 10:
+                    fri_final['%d시' % num] = fri_pos.get('%d시' % num)[0]
+                    fri_pos['%d시' % num] = []
+                    count_dic['%s_count' % name] = count_dic.get('%s_count' % name)+1
+                elif fri_pos.get('%d시' % num)[0] == name and count_dic.get('%s_count' % name) >= 10:
+                    fri_final['%d시' % num] = '불가'
+                    fri_pos['%d시' % num] = []
 
 
 
+
+    print(count_dic)
     print(mon_final)
     print(tue_final)
     print(wed_final)
     print(thu_final)
     print(fri_final)
+
 
 a = ['10:00~14:00', '15:00~18:00', '11:00~13:00;14:00~16:00', '10:00~11:00', '15:00~18:00']
 b = ['11:00~14:00', '14:00~16:00', '16:00~18:00', '10:00~11:00;12:00~13:00', '14:00~16:00']
