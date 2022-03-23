@@ -17,7 +17,7 @@ def mix_members():
     num2 = [0, 5, 10, 15]
     random.shuffle(members)
     i = len(members)
-    joe = {}
+    group = {}
     seven = 0
     six = 0
     five = 0
@@ -65,7 +65,7 @@ def mix_members():
             seven = seven - 1
             for i in range(0, 7):
                 member.append(members.pop(0))
-            joe['%d조' % num] = member
+            group['%d조' % num] = member
             continue
 
         if six != 0:
@@ -73,7 +73,7 @@ def mix_members():
             six = six - 1
             for i in range(0, 6):
                 member.append(members.pop(0))
-            joe['%d조' % num] = member
+            group['%d조' % num] = member
             continue
 
         if five != 0:
@@ -81,7 +81,9 @@ def mix_members():
             five = five - 1
             for i in range(0, 5):
                 member.append(members.pop(0))
-            joe['%d조' % num] = member
+            group['%d조' % num] = member
             continue
 
-    print(joe)
+    print(group)
+
+mix_members()
