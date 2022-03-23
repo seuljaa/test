@@ -8,11 +8,19 @@ def make_timetable(a_time: list, b_time: list, c_time: list, d_time: list):
     thu_pos = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
     fri_pos = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
 
+    mon_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
+    tue_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
+    wed_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
+    thu_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
+    fri_final = {'10시': [], '11시': [], '12시': [], '13시': [], '14시': [], '15시': [], '16시': [], '17시': []}
+
     mon = {'a': [], 'b': [], 'c': [], 'd': []}
     tue = {'a': [], 'b': [], 'c': [], 'd': []}
     wed = {'a': [], 'b': [], 'c': [], 'd': []}
     thu = {'a': [], 'b': [], 'c': [], 'd': []}
     fri = {'a': [], 'b': [], 'c': [], 'd': []}
+
+    data = []
 
     for count in range(0, 5):
         a_times = a_time[count]
@@ -31,8 +39,157 @@ def make_timetable(a_time: list, b_time: list, c_time: list, d_time: list):
         for day in days:
             if count == 0:
                 mon_pos['%d시' % day] = ['a']
+            if count == 1:
+                tue_pos['%d시' % day] = ['a']
+            if count == 2:
+                wed_pos['%d시' % day] = ['a']
+            if count == 3:
+                thu_pos['%d시' % day] = ['a']
+            if count == 4:
+                fri_pos['%d시' % day] = ['a']
 
-    print(mon_pos)
+    for count in range(0, 5):
+        b_times = b_time[count]
+        days = []
+        if ';' in b_times:
+            for counts in range(0, len(b_times.split(';'))):
+                time = b_times.split(';')[counts].split('~')
+                length = range(int(time[0][0:2]), int(time[1][0:2]))
+                for i in length:
+                    days.append(i)
+        else:
+            b_times = b_times.split('~')
+            length = range(int(b_times[0][0:2]), int(b_times[1][0:2]))
+            for i in length:
+                days.append(i)
+        for day in days:
+            if count == 0:
+                data = mon_pos.get('%d시' % day)
+                data.append('b')
+                mon_pos['%d시' % day] = data
+                data = []
+            if count == 1:
+                data = tue_pos.get('%d시' % day)
+                data.append('b')
+                tue_pos['%d시' % day] = data
+                data = []
+            if count == 2:
+                data = wed_pos.get('%d시' % day)
+                data.append('b')
+                wed_pos['%d시' % day] = data
+                data = []
+            if count == 3:
+                data = thu_pos.get('%d시' % day)
+                data.append('b')
+                thu_pos['%d시' % day] = data
+                data = []
+            if count == 4:
+                data = fri_pos.get('%d시' % day)
+                data.append('b')
+                fri_pos['%d시' % day] = data
+                data = []
+
+    for count in range(0, 5):
+        c_times = c_time[count]
+        days = []
+        if ';' in c_times:
+            for counts in range(0, len(c_times.split(';'))):
+                time = c_times.split(';')[counts].split('~')
+                length = range(int(time[0][0:2]), int(time[1][0:2]))
+                for i in length:
+                    days.append(i)
+        else:
+            c_times = c_times.split('~')
+            length = range(int(c_times[0][0:2]), int(c_times[1][0:2]))
+            for i in length:
+                days.append(i)
+        for day in days:
+            if count == 0:
+                data = mon_pos.get('%d시' % day)
+                data.append('c')
+                mon_pos['%d시' % day] = data
+                data = []
+            if count == 1:
+                data = tue_pos.get('%d시' % day)
+                data.append('c')
+                tue_pos['%d시' % day] = data
+                data = []
+            if count == 2:
+                data = wed_pos.get('%d시' % day)
+                data.append('c')
+                wed_pos['%d시' % day] = data
+                data = []
+            if count == 3:
+                data = thu_pos.get('%d시' % day)
+                data.append('c')
+                thu_pos['%d시' % day] = data
+                data = []
+            if count == 4:
+                data = fri_pos.get('%d시' % day)
+                data.append('c')
+                fri_pos['%d시' % day] = data
+                data = []
+
+    for count in range(0, 5):
+        d_times = d_time[count]
+        days = []
+        if ';' in d_times:
+            for counts in range(0, len(d_times.split(';'))):
+                time = d_times.split(';')[counts].split('~')
+                length = range(int(time[0][0:2]), int(time[1][0:2]))
+                for i in length:
+                    days.append(i)
+        else:
+            d_times = d_times.split('~')
+            length = range(int(d_times[0][0:2]), int(d_times[1][0:2]))
+            for i in length:
+                days.append(i)
+        for day in days:
+            if count == 0:
+                data = mon_pos.get('%d시' % day)
+                data.append('d')
+                mon_pos['%d시' % day] = data
+                data = []
+            if count == 1:
+                data = tue_pos.get('%d시' % day)
+                data.append('d')
+                tue_pos['%d시' % day] = data
+                data = []
+            if count == 2:
+                data = wed_pos.get('%d시' % day)
+                data.append('d')
+                wed_pos['%d시' % day] = data
+                data = []
+            if count == 3:
+                data = thu_pos.get('%d시' % day)
+                data.append('d')
+                thu_pos['%d시' % day] = data
+                data = []
+            if count == 4:
+                data = fri_pos.get('%d시' % day)
+                data.append('d')
+                fri_pos['%d시' % day] = data
+                data = []
+
+    for num in range(10, 18):
+        if len(mon_pos.get('%d시' % num)) == 1:
+            mon_final['%d시' % num] = mon_pos.get('%d시' % num)
+        if len(tue_pos.get('%d시' % num)) == 1:
+            tue_final['%d시' % num] = tue_pos.get('%d시' % num)
+        if len(wed_pos.get('%d시' % num)) == 1:
+            wed_final['%d시' % num] = wed_pos.get('%d시' % num)
+        if len(thu_pos.get('%d시' % num)) == 1:
+            thu_final['%d시' % num] = thu_pos.get('%d시' % num)
+        if len(fri_pos.get('%d시' % num)) == 1:
+            fri_final['%d시' % num] = fri_pos.get('%d시' % num)
+
+
+
+    print(mon_final)
+    print(tue_final)
+    print(wed_final)
+    print(thu_final)
+    print(fri_final)
 
 a = ['10:00~14:00', '15:00~18:00', '11:00~13:00;14:00~16:00', '10:00~11:00', '15:00~18:00']
 b = ['11:00~14:00', '14:00~16:00', '16:00~18:00', '10:00~11:00;12:00~13:00', '14:00~16:00']
